@@ -40,7 +40,7 @@ const productos = [
     },
 ]
 
-let carrito = [];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 productos.forEach((producto) => {
     let content = document.createElement("div")
@@ -72,13 +72,8 @@ productos.forEach((producto) => {
             console.log(carrito);
             alert(`Producto agregado correctamente al carrito.`);
         }
-        // carrito.push({
-        //     id: producto.id,
-        //     img: producto.img,
-        //     nombre: producto.nombre,
-        //     precio: producto.precio,
-        // });
-        // alert("Tu producto se agrego al carrito");
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        
         
     });
 });
