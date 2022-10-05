@@ -90,19 +90,22 @@ productos.forEach((producto) => {
 
     content.append(comprar);
 
+    
+    
     comprar.addEventListener("click", () => {
         let agregarProducto = productos.find(p => p.id === producto.id);
         let existe = carrito.find(elemento => elemento.id === producto.id)
-        if (existe){
-            existe.cantidad++;
-            console.log(carrito);
-            alert(`El producto ${producto.nombre} fue agregada nuevamente al carrito.`)
-        } else{
-            agregarProducto.cantidad = 1;
-            carrito.push(agregarProducto);
-            console.log(carrito);
-            alert(`Producto agregado correctamente al carrito.`);
-        }
+        existe ? (existe.cantidad++,alert(`El producto ${producto.nombre} fue agregada nuevamente al carrito.`)) : (agregarProducto.cantidad = 1, carrito.push(agregarProducto), alert(`Producto agregado correctamente al carrito.`))
+        // if (existe){
+        //     existe.cantidad++;
+        //     console.log(carrito);
+        //     alert(`El producto ${producto.nombre} fue agregada nuevamente al carrito.`)
+        // } else{
+        //     agregarProducto.cantidad = 1;
+        //     carrito.push(agregarProducto);
+        //     console.log(carrito);
+        //     alert(`Producto agregado correctamente al carrito.`);
+        // }
         localStorage.setItem("carrito", JSON.stringify(carrito));
         
         
