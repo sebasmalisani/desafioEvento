@@ -42,26 +42,26 @@ const productos = [
 
 
 
-const desestructurar = (productos) => {
-    const [{id, nombre, precio}] = productos;
-    console.log(nombre);
-};
+// const desestructurar = (productos) => {
+//     const [{id, nombre, precio}] = productos;
+//     console.log(nombre);
+// };
 
-desestructurar(productos);
+// desestructurar(productos);
 
-const [a, b] = productos;
-console.log(a, b);
+// const [a, b] = productos;
+// console.log(a, b);
 
 
-console.log(...productos)
+// console.log(...productos)
 
-let numero = 11;
-let numeroLiteral = numero == 5 ? 'cinco' :
-                    numero == 7 ? 'siete' :
-                    numero == 11 ? 'once' :
-                    numero == 15 ? 'quince' :
-                    'otro numero';
-console.log( numeroLiteral );
+// let numero = 11;
+// let numeroLiteral = numero == 5 ? 'cinco' :
+//                     numero == 7 ? 'siete' :
+//                     numero == 11 ? 'once' :
+//                     numero == 15 ? 'quince' :
+//                     'otro numero';
+// console.log( numeroLiteral );
 
 
 // const [{ id, nombre, precio, }] = productos;
@@ -69,7 +69,7 @@ console.log( numeroLiteral );
 // console.log(nombre);
 // console.log(precio);
 
-
+// Swal.fire('sweetalert');
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
@@ -95,7 +95,17 @@ productos.forEach((producto) => {
     comprar.addEventListener("click", () => {
         let agregarProducto = productos.find(p => p.id === producto.id);
         let existe = carrito.find(elemento => elemento.id === producto.id)
-        existe ? (existe.cantidad++,alert(`El producto ${producto.nombre} fue agregada nuevamente al carrito.`)) : (agregarProducto.cantidad = 1, carrito.push(agregarProducto), alert(`Producto agregado correctamente al carrito.`))
+        existe ? (existe.cantidad++,Swal.fire({
+            icon: 'success',
+            title: 'Felicidades',
+            text: `${producto.nombre} fue agregado nuevamente al carrito!` })) 
+            : (agregarProducto.cantidad = 1, carrito.push(agregarProducto), Swal.fire({
+            icon: 'success',
+            title: 'Felicidades',
+            text: `${producto.nombre} fue agregado al carrito`
+        }))
+        
+        // alert(`Producto agregado correctamente al carrito.`))
         // if (existe){
         //     existe.cantidad++;
         //     console.log(carrito);
