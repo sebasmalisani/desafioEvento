@@ -16,11 +16,11 @@ const pintarCarrito = () => {
     modalButton.addEventListener("click", () => {
         modalContainer.style.display = "none";
     });
-    
+
 
     modalHeader.append(modalButton);
 
-    carrito.forEach((producto) => {
+    carrito.forEach((producto, index) => {
         let carritoContent = document.createElement("div")
         carritoContent.className = "modal-content";
         carritoContent.innerHTML = `
@@ -30,17 +30,19 @@ const pintarCarrito = () => {
             <p class="cantidad">Cantidad: ${producto.cantidad}</p>
             <p>Total: ${producto.cantidad * producto.precio}</p>
         `;
-        
-    modalContainer.append(carritoContent);
 
-    console.log(carrito.length);
+        modalContainer.append(carritoContent);
 
-    let eliminar = document.createElement("span");
-    eliminar.innerText = "❌";
-    eliminar.className = "delete-product";
-    carritoContent.append(eliminar);
+        console.log(carrito.length);
 
-    eliminar.addEventListener("click", eliminarProducto);
+        let eliminar = document.createElement("span");
+        eliminar.innerText = "❌";
+        eliminar.className = "delete-product";
+        carritoContent.append(eliminar);
+
+        eliminar.addEventListener("click", () => {
+            eliminarProducto(index)
+        });
     });
 
 
@@ -55,21 +57,15 @@ const pintarCarrito = () => {
 
 verCarrito.addEventListener("click", pintarCarrito);
 
-const eliminarProducto = () =>{
-    const foundId = carrito.find((element) => element.id );
-    carrito = carrito.filter((carritoId) => {
-        Swal.fire({
-            icon: 'success',
-            title: 'Felicidades elimino su producto.',
-        })
-        return carritoId !== foundId;
-        
-    });
+const eliminarProducto = (index) => {
+    carrito[index].cantidad--
+     carrito[index].cantidad == 0 && carrito.splice(index, 1)
+     localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+    Swal.fire({
+        icon: 'success',
+        title: 'Elimino su producto',
+    })
     carritoCounter();
     pintarCarrito();
-};
-
-const carritoCounter = () => {
-    cantidadCarrito.style.display = "block";
-    cantidadCarrito.innerText = carrito.length;
 }
