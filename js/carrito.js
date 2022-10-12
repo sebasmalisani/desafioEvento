@@ -56,9 +56,14 @@ const pintarCarrito = () => {
 verCarrito.addEventListener("click", pintarCarrito);
 
 const eliminarProducto = () =>{
-    const foundId = carrito.find((element) => element.id);
+    const foundId = carrito.find((element) => element.id );
     carrito = carrito.filter((carritoId) => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Felicidades elimino su producto.',
+        })
         return carritoId !== foundId;
+        
     });
     carritoCounter();
     pintarCarrito();
