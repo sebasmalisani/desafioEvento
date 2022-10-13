@@ -66,6 +66,7 @@ const eliminarProducto = (index) => {
         icon: 'success',
         title: 'Elimino su producto',
     })
-    carritoCounter();
     pintarCarrito();
+    contarCarrito();
 }
+

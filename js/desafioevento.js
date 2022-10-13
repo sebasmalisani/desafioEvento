@@ -56,14 +56,24 @@ const pedirProductos = async () => {
             localStorage.setItem("carrito", JSON.stringify(carrito));
 
             carritoCounter();
+            contarCarrito();
         });
     });
 };
+
+
 
 const carritoCounter = () => {
     cantidadCarrito.style.display = "block";
     cantidadCarrito.innerText = carrito.length;
 }
 
+function contarCarrito() {
+    let contador = document.getElementById('cantidadCarrito');
+    let cantidad = carrito.reduce((acc, p) => (acc += p.cantidad), 0);
+    contador.textContent = cantidad;
+    }
+    
 pedirProductos();
 carritoCounter();
+contarCarrito();
